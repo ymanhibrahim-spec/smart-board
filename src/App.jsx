@@ -11,6 +11,9 @@ import StudentQuiz from './pages/StudentQuiz'
 import QuizMonitor from './pages/QuizMonitor'
 import RemoteMic from './pages/RemoteMic'
 import CreateQuiz from './pages/CreateQuiz'
+import Lessons from './pages/Lessons'
+import Exams from './pages/Exams'
+import Files from './pages/Files'
 import Navbar from './components/Navbar'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
@@ -30,13 +33,16 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/smart-board">
         <div className="app-container">
           <Navbar />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+              <Route path="/lessons" element={<PrivateRoute><Lessons /></PrivateRoute>} />
+              <Route path="/exams" element={<PrivateRoute><Exams /></PrivateRoute>} />
+              <Route path="/files" element={<PrivateRoute><Files /></PrivateRoute>} />
               <Route path="/lesson" element={<PrivateRoute><Lesson /></PrivateRoute>} />
               <Route path="/lesson-summary" element={<PrivateRoute><LessonSummary /></PrivateRoute>} />
               <Route path="/login" element={<Login />} />

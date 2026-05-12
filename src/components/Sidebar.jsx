@@ -22,9 +22,9 @@ const Sidebar = () => {
 
   const menuItems = [
     { icon: <LayoutDashboard size={20} />, label: t.dashboard, path: '/dashboard' },
-    { icon: <BookOpen size={20} />, label: t.myLessons, path: '/dashboard' },
-    { icon: <FileText size={20} />, label: t.files, path: '/dashboard' },
-    { icon: <Award size={20} />, label: t.quizzes, path: '/dashboard' },
+    { icon: <BookOpen size={20} />, label: t.myLessons, path: '/lessons' },
+    { icon: <FileText size={20} />, label: t.files, path: '/files' },
+    { icon: <Award size={20} />, label: t.quizzes, path: '/exams' },
     { icon: <Settings size={20} />, label: t.settings, path: '/settings' },
   ]
 

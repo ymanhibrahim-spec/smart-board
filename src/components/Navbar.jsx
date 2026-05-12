@@ -66,11 +66,43 @@ const Navbar = () => {
         <button 
           className="mobile-toggle" 
           onClick={() => setIsOpen(!isOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* Mobile Menu Content */}
+      {isOpen && (
+        <div className="mobile-menu" style={{ 
+          position: 'absolute', 
+          top: '100%', 
+          left: 0, 
+          right: 0, 
+          background: 'var(--glass)', 
+          backdropFilter: 'blur(10px)',
+          padding: '20px', 
+          borderTop: '1px solid var(--border-color)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          boxShadow: 'var(--shadow)',
+          borderRadius: '0 0 20px 20px'
+        }}>
+          {navLinks.map((link) => (
+            <Link key={link.name} to={link.path} onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: '500', padding: '10px 0' }}>{link.name}</Link>
+          ))}
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)' }} />
+          {currentUser ? (
+            <Link to="/dashboard" className="btn-primary" onClick={() => setIsOpen(false)} style={{ justifyContent: 'center' }}>{t.dashboard}</Link>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <Link to="/login" className="btn-outline" onClick={() => setIsOpen(false)} style={{ textAlign: 'center' }}>{t.login}</Link>
+              <Link to="/register" className="btn-primary" onClick={() => setIsOpen(false)} style={{ justifyContent: 'center' }}>{t.signup}</Link>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   )
 }

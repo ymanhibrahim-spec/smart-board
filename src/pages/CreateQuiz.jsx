@@ -10,6 +10,7 @@ import { QRCodeSVG } from 'qrcode.react'
 const CreateQuiz = () => {
   const { currentUser } = useAuth()
   const navigate = useNavigate()
+  const lang = localStorage.getItem('app-lang') || 'ar'
   const [title, setTitle] = useState('')
   const [questions, setQuestions] = useState([
     { type: 'choice', question: '', options: ['', '', '', ''], correctAnswer: '', points: 1 }
@@ -17,6 +18,9 @@ const CreateQuiz = () => {
   const [loading, setLoading] = useState(false)
   const [showPublishModal, setShowPublishModal] = useState(false)
   const [publishedQuiz, setPublishedQuiz] = useState(null)
+  const [aiPrompt, setAiPrompt] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [showAIModal, setShowAIModal] = useState(false)
 
   const addQuestion = (type = 'choice') => {
     let newQ = { type, question: '', options: [], correctAnswer: '', points: 1 }
@@ -56,21 +60,71 @@ const CreateQuiz = () => {
     setLoading(false)
   }
 
+  const handleAIGenerate = async () => {
+    if (!aiPrompt) return
+    setIsGenerating(true)
+    
+    // Simulating AI delay
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    try {
+      // Mock AI Logic based on keywords
+      const promptLower = aiPrompt.toLowerCase()
+      let generatedTitle = aiPrompt
+      let generatedQuestions = []
+
+      if (promptLower.includes('رياضيات') || promptLower.includes('math')) {
+        generatedTitle = "اختبار رياضيات ذكي"
+        generatedQuestions = [
+          { type: 'choice', question: 'ما هو ناتج 5 × 5؟', options: ['10', '20', '25', '30'], correctAnswer: '25', points: 5 },
+          { type: 'tf', question: 'الرقم 7 هو رقم أولي.', options: ['صح', 'خطأ'], correctAnswer: 'صح', points: 5 },
+          { type: 'choice', question: 'جذر الرقم 16 هو:', options: ['2', '4', '8', '16'], correctAnswer: '4', points: 5 }
+        ]
+      } else if (promptLower.includes('علوم') || promptLower.includes('science')) {
+        generatedTitle = "اختبار علوم عامة"
+        generatedQuestions = [
+          { type: 'choice', question: 'ما هو أقرب كوكب للشمس؟', options: ['المريخ', 'الزهرة', 'عطارد', 'الأرض'], correctAnswer: 'عطارد', points: 5 },
+          { type: 'tf', question: 'الماء يغلي عند درجة حرارة 100 مئوية.', options: ['صح', 'خطأ'], correctAnswer: 'صح', points: 5 },
+          { type: 'choice', question: 'ما هو الغاز الذي تتنفسه الكائنات الحية؟', options: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون', 'الهيدروجين'], correctAnswer: 'الأكسجين', points: 5 }
+        ]
+      } else {
+        // Generic AI Generation
+        generatedTitle = `اختبار عن: ${aiPrompt}`
+        generatedQuestions = [
+          { type: 'choice', question: `ما هو المفهوم الأساسي في ${aiPrompt}؟`, options: ['الخيار الأول', 'الخيار الثاني', 'الخيار الثالث', 'الخيار الرابع'], correctAnswer: 'الخيار الأول', points: 10 },
+          { type: 'tf', question: `هل تعتبر ${aiPrompt} من العلوم الحديثة؟`, options: ['صح', 'خطأ'], correctAnswer: 'صح', points: 10 },
+          { type: 'text', question: `اشرح باختصار أهمية ${aiPrompt} في حياتنا.`, options: [], correctAnswer: '', points: 10 }
+        ]
+      }
+
+      setTitle(generatedTitle)
+      setQuestions(generatedQuestions)
+      setShowAIModal(false)
+      setAiPrompt('')
+    } catch (err) { console.error(err) }
+    setIsGenerating(false)
+  }
+
   return (
     <div className="container section-padding">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <header style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', justifyContent: 'space-between', alignItems: window.innerWidth < 768 ? 'stretch' : 'center', gap: '20px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}>
             <ArrowLeft size={24} className="rtl-flip" />
           </button>
-          <h1 style={{ fontSize: '2rem' }}>تصميم الامتحان الذكي</h1>
+          <h1 style={{ fontSize: '1.5rem' }}>تصميم الامتحان</h1>
         </div>
-        <button className="btn-primary" onClick={handleSave} disabled={loading} style={{ padding: '12px 40px' }}>
-          <Save size={18} /> {loading ? 'جاري الحفظ...' : 'نشر وتصحيح تلقائي'}
-        </button>
+        <div style={{ display: 'flex', gap: '10px', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
+          <button className="btn-outline" onClick={() => setShowAIModal(true)} style={{ borderColor: 'var(--primary)', color: 'var(--primary)', borderStyle: 'dashed', borderWidth: '2px', padding: '12px' }}>
+            <Sparkles size={18} /> {lang === 'ar' ? 'توليد ذكي' : 'AI Generate'}
+          </button>
+          <button className="btn-primary" onClick={handleSave} disabled={loading} style={{ padding: '12px 30px' }}>
+            <Save size={18} /> {loading ? 'جاري الحفظ...' : 'نشر الآن'}
+          </button>
+        </div>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '30px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth < 1024 ? '1fr' : '1fr 350px', gap: '30px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <input 
             type="text" 
@@ -127,10 +181,10 @@ const CreateQuiz = () => {
             </motion.div>
           ))}
 
-          <div style={{ display: 'flex', gap: '15px' }}>
-            <button onClick={() => addQuestion('choice')} className="btn-outline" style={{ flex: 1 }}><List size={18} /> اختيارات</button>
-            <button onClick={() => addQuestion('tf')} className="btn-outline" style={{ flex: 1 }}><CheckCircle size={18} /> صح وخطأ</button>
-            <button onClick={() => addQuestion('text')} className="btn-outline" style={{ flex: 1 }}><Type size={18} /> مقالي</button>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <button onClick={() => addQuestion('choice')} className="btn-outline" style={{ flex: 1, minWidth: '100px', fontSize: '0.9rem' }}><List size={16} /> اختيارات</button>
+            <button onClick={() => addQuestion('tf')} className="btn-outline" style={{ flex: 1, minWidth: '100px', fontSize: '0.9rem' }}><CheckCircle size={16} /> صح وخطأ</button>
+            <button onClick={() => addQuestion('text')} className="btn-outline" style={{ flex: 1, minWidth: '100px', fontSize: '0.9rem' }}><Type size={16} /> مقالي</button>
           </div>
         </div>
 
@@ -159,13 +213,48 @@ const CreateQuiz = () => {
               <button onClick={() => navigate('/dashboard')} style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', color: 'var(--text-dark)' }}><X size={24} /></button>
               <h1 style={{ fontSize: '2rem', marginBottom: '30px', color: 'var(--primary)' }}>الامتحان جاهز للانطلاق!</h1>
               <div style={{ background: 'white', padding: '20px', borderRadius: '25px', display: 'inline-block', marginBottom: '30px', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
-                <QRCodeSVG value={`${window.location.origin}/quiz/${publishedQuiz.id}`} size={280} />
+                <QRCodeSVG value={`${window.location.origin}/smart-board/quiz/${publishedQuiz.id}`} size={280} />
               </div>
               <div style={{ marginBottom: '30px' }}>
                 <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>رقم الانضمام السريع:</p>
                 <div style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '10px', color: 'var(--secondary)' }}>{publishedQuiz.shortCode}</div>
               </div>
               <button onClick={() => navigate(`/quiz-monitor/${publishedQuiz.id}`)} className="btn-primary" style={{ width: '100%', padding: '18px', fontSize: '1.2rem', background: 'var(--secondary)' }}>بدء مراقبة الطلاب والنتائج</button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* AI Generator Modal */}
+      <AnimatePresence>
+        {showAIModal && (
+          <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 5000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+            <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="glass-morphism" style={{ width: '100%', maxWidth: '500px', padding: '30px', background: 'var(--white)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Sparkles color="var(--primary)" /> {lang === 'ar' ? 'مساعدك الذكي' : 'AI Assistant'}</h2>
+                <button onClick={() => setShowAIModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={24} /></button>
+              </div>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '20px', fontSize: '0.9rem' }}>{lang === 'ar' ? 'اكتب موضوع الدرس أو نصاً معيناً، وسأقوم بإنشاء أسئلة متنوعة لك تلقائياً.' : 'Write a topic or text, and I will generate questions for you automatically.'}</p>
+              
+              <textarea 
+                placeholder={lang === 'ar' ? 'مثال: "الجهاز الهضمي عند الإنسان" أو "قواعد اللغة العربية"...' : 'Example: "Human digestive system" or "Algebra basics"...'}
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                style={{ width: '100%', height: '120px', padding: '15px', marginBottom: '20px', borderRadius: '15px' }}
+              />
+              
+              <button 
+                onClick={handleAIGenerate} 
+                disabled={isGenerating || !aiPrompt}
+                className="btn-primary" 
+                style={{ width: '100%', padding: '15px', justifyContent: 'center', background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+              >
+                {isGenerating ? (
+                  <>{lang === 'ar' ? 'جاري التفكير...' : 'Thinking...'}</>
+                ) : (
+                  <><Sparkles size={18} /> {lang === 'ar' ? 'توليد الأسئلة الآن' : 'Generate Questions Now'}</>
+                )}
+              </button>
             </motion.div>
           </div>
         )}

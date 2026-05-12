@@ -104,29 +104,29 @@ const StudentQuiz = () => {
   }
 
   if (step === 'cheated') return (
-    <div className="container" style={{ padding: '100px 20px', textAlign: 'center' }}>
-      <AlertTriangle size={80} color="#ff4444" style={{ marginBottom: '20px' }} />
-      <h2 style={{ color: '#ff4444' }}>⚠️ تم قفل الامتحان!</h2>
-      <p style={{ fontSize: '1.2rem', margin: '20px 0' }}>لقد حاولت الغش بمغادرة الصفحة. تم إرسال تنبيه للمعلم.</p>
-      <div className="glass-morphism" style={{ padding: '20px', background: 'rgba(255,68,68,0.05)' }}>
+    <div className="container" style={{ padding: '60px 20px', textAlign: 'center' }}>
+      <AlertTriangle size={60} color="#ff4444" style={{ marginBottom: '20px' }} />
+      <h2 style={{ color: '#ff4444', fontSize: '1.5rem' }}>⚠️ تم قفل الامتحان!</h2>
+      <p style={{ fontSize: '1.1rem', margin: '20px 0' }}>لقد حاولت الغش بمغادرة الصفحة. تم إرسال تنبيه للمعلم.</p>
+      <div className="glass-morphism" style={{ padding: '20px', background: 'rgba(255,68,68,0.05)', fontSize: '0.95rem' }}>
         انتظر المعلم ليعطيك "فرصة ثانية" إذا وافق على ذلك. ستفتح الصفحة تلقائياً عند فك القفل.
       </div>
     </div>
   )
 
   return (
-    <div className="student-quiz-page" style={{ minHeight: '100vh', background: 'var(--bg-light)', padding: '20px' }}>
+    <div className="student-quiz-page" style={{ minHeight: '100vh', background: 'white', padding: '20px' }}>
       <div className="container" style={{ maxWidth: '600px' }}>
         <AnimatePresence mode="wait">
           {step === 'name' && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-morphism" style={{ padding: '40px', textAlign: 'center' }}>
-              <User size={50} color="var(--primary)" style={{ marginBottom: '20px' }} />
-              <h2>{quiz?.title}</h2>
-              <div style={{ margin: '30px 0', padding: '15px', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '12px', fontSize: '0.9rem', color: 'var(--primary)' }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-morphism" style={{ padding: '30px 20px', textAlign: 'center', background: 'white', boxShadow: 'none', border: '1px solid #eee' }}>
+              <User size={40} color="var(--primary)" style={{ marginBottom: '15px' }} />
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--text-dark)' }}>{quiz?.title}</h2>
+              <div style={{ margin: '20px 0', padding: '12px', background: '#fff9f0', borderRadius: '12px', fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 'bold' }}>
                 نظام التصحيح التلقائي مفعل. ستظهر نتيجتك فور الانتهاء.
               </div>
-              <input type="text" placeholder="اسمك الكامل..." value={studentName} onChange={(e) => setStudentName(e.target.value)} style={{ width: '100%', padding: '15px', textAlign: 'center', marginBottom: '20px', fontSize: '1.2rem' }} />
-              <button className="btn-primary" style={{ width: '100%', padding: '18px' }} onClick={handleStart} disabled={!studentName.trim()}>دخول الامتحان</button>
+              <input type="text" placeholder="اسمك الكامل..." value={studentName} onChange={(e) => setStudentName(e.target.value)} style={{ width: '100%', padding: '12px', textAlign: 'center', marginBottom: '20px', fontSize: '1.1rem', background: '#f9f9f9', border: '1px solid #ddd' }} />
+              <button className="btn-primary" style={{ width: '100%', padding: '16px' }} onClick={handleStart} disabled={!studentName.trim()}>دخول الامتحان</button>
             </motion.div>
           )}
 
@@ -164,18 +164,18 @@ const StudentQuiz = () => {
           )}
 
           {step === 'done' && finalResult && (
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-morphism" style={{ padding: '60px 40px', textAlign: 'center' }}>
-              <Trophy size={80} color="#f59e0b" style={{ marginBottom: '30px' }} />
-              <h2 style={{ marginBottom: '10px' }}>مبروك يا {studentName}!</h2>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>لقد أتممت الاختبار بنجاح. إليك نتيجتك:</p>
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-morphism" style={{ padding: '40px 20px', textAlign: 'center' }}>
+              <Trophy size={60} color="#f59e0b" style={{ marginBottom: '20px' }} />
+              <h2 style={{ marginBottom: '10px', fontSize: '1.5rem' }}>مبروك يا {studentName}!</h2>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.95rem' }}>لقد أتممت الاختبار بنجاح. إليك نتيجتك:</p>
               
-              <div style={{ display: 'inline-flex', flexDirection: 'column', gap: '10px', background: 'rgba(59, 130, 246, 0.1)', padding: '30px 60px', borderRadius: '30px', border: '2px solid var(--primary)' }}>
-                <span style={{ fontSize: '1rem', color: 'var(--primary)' }}>الدرجة النهائية</span>
-                <span style={{ fontSize: '4rem', fontWeight: '900', color: 'var(--primary)' }}>{finalResult.score} / {finalResult.totalPoints}</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', background: 'rgba(59, 130, 246, 0.1)', padding: '20px 30px', borderRadius: '20px', border: '2px solid var(--primary)', margin: '0 auto', maxWidth: '250px' }}>
+                <span style={{ fontSize: '0.9rem', color: 'var(--primary)' }}>الدرجة النهائية</span>
+                <span style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--primary)' }}>{finalResult.score} / {finalResult.totalPoints}</span>
               </div>
               
-              <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '5px' }}>
-                {[1,2,3,4,5].map(s => <Star key={s} size={30} fill={s <= (finalResult.score/finalResult.totalPoints * 5) ? "#f59e0b" : "none"} color="#f59e0b" />)}
+              <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                {[1,2,3,4,5].map(s => <Star key={s} size={24} fill={s <= (finalResult.score/finalResult.totalPoints * 5) ? "#f59e0b" : "none"} color="#f59e0b" />)}
               </div>
             </motion.div>
           )}

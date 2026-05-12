@@ -89,29 +89,39 @@ const Lesson = () => {
       
       {/* Top Header */}
       {!isFullScreen && (
-        <header className="glass-morphism" style={{ padding: '12px 25px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <header className="glass-morphism" style={{ padding: '12px 20px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1 }}>
             <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}>
               <ArrowLeft size={24} className="rtl-flip" />
             </button>
             <input 
               type="text" 
-              placeholder={lang === 'ar' ? "أدخل عنوان الدرس..." : "Enter lesson title..."}
+              placeholder={lang === 'ar' ? "عنوان الدرس..." : "Lesson title..."}
               value={lessonInfo.title}
               onChange={(e) => setLessonInfo({...lessonInfo, title: e.target.value})}
-              style={{ border: 'none', borderBottom: '2px solid var(--primary)', padding: '5px 10px', fontSize: '1.2rem', fontWeight: 'bold', background: 'transparent', color: 'var(--text-dark)', outline: 'none', width: '300px' }}
+              style={{ border: 'none', borderBottom: '2px solid var(--primary)', padding: '5px', fontSize: '1.1rem', fontWeight: 'bold', background: 'transparent', color: 'var(--text-dark)', outline: 'none', width: '100%', maxWidth: '200px' }}
             />
           </div>
-          <div style={{ display: 'flex', gap: '15px' }}>
+          <div className="desktop-only-feature" style={{ display: 'flex', gap: '15px' }}>
             <button className="btn-primary" onClick={handleSave} disabled={loading}>
-              <Save size={20} /> {loading ? t.loading : (lang === 'ar' ? 'حفظ وإنهاء الحصة' : 'Save & Finish')}
+              <Save size={20} /> {loading ? t.loading : (lang === 'ar' ? 'حفظ وإنهاء' : 'Save & Finish')}
             </button>
           </div>
         </header>
       )}
 
+      {/* Mobile-only message for Lesson Page */}
+      <div className="mobile-only-feature" style={{ display: 'none', textAlign: 'center', padding: '40px 20px' }}>
+        <div className="glass-morphism" style={{ padding: '30px' }}>
+          <Smartphone size={60} color="var(--primary)" style={{ marginBottom: '20px' }} />
+          <h2 style={{ marginBottom: '15px' }}>السبورة الذكية</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '25px' }}>عذراً، السبورة والمايكروفون متاحان فقط على أجهزة الكمبيوتر لضمان أفضل تجربة شرح.</p>
+          <button onClick={() => navigate('/dashboard')} className="btn-primary" style={{ width: '100%' }}>العودة للوحة التحكم</button>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <div style={{ display: 'flex', flex: 1, gap: '15px', overflow: 'hidden', position: 'relative' }}>
+      <div className="desktop-only-feature" style={{ display: 'flex', flex: 1, gap: '15px', overflow: 'hidden', position: 'relative' }}>
         <div style={{ flex: 1, height: '100%', position: 'relative' }}>
           <Whiteboard 
             onSave={setBoardImage} 

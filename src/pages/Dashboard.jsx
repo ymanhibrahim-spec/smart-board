@@ -41,7 +41,7 @@ const Dashboard = () => {
   }, [currentUser])
 
   const copyStudentLink = () => {
-    const link = window.location.origin
+    const link = `${window.location.origin}/smart-board`
     navigator.clipboard.writeText(link)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
