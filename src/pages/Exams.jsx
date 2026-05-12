@@ -52,7 +52,7 @@ const Exams = () => {
     <div className="container" style={{ display: 'flex', gap: '30px', padding: '20px 0' }}>
       <Sidebar />
       <div className="main-content" style={{ flex: 1 }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+        <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
           <div>
             <h1 style={{ fontSize: '2.2rem', color: 'var(--primary)' }}>{lang === 'ar' ? 'بنك الاختبارات' : 'Exam Bank'} 📝</h1>
             <p style={{ color: 'var(--text-muted)' }}>{lang === 'ar' ? 'إدارة الاختبارات والنتائج الخاصة بك.' : 'Manage your exams and results.'}</p>

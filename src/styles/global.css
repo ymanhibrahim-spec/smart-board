@@ -106,7 +106,7 @@ input:focus {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 5px 20px rgba(255, 174, 66, 0.4);
 }
 
 .btn-outline {
@@ -119,6 +119,10 @@ input:focus {
   font-weight: 600;
   transition: var(--transition);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .btn-outline:hover {
@@ -140,7 +144,7 @@ input:focus {
   transform: scaleX(-1);
 }
 
-/* Sidebar & Cards Consistency */
+/* Sidebar & Cards */
 .sidebar {
   background-color: var(--card-bg) !important;
   border: 1px solid var(--border-color) !important;
@@ -162,63 +166,7 @@ input:focus {
   transform: translateX(-5px);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 15px;
-  }
-  
-  .section-padding {
-    padding: 40px 0;
-  }
-  
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.2rem; }
-  
-  .glass-morphism {
-    padding: 20px !important;
-  }
-  
-  .btn-primary, .btn-outline {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Hide specific components on mobile as requested */
-  .desktop-only-feature {
-    display: none !important;
-  }
-
-  .mobile-only-feature {
-    display: block !important;
-  }
-  
-  .sidebar {
-    display: none !important; /* Hide static sidebar on mobile */
-  }
-  
-  .main-content {
-    padding: 10px !important;
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .glass-morphism {
-    padding: 15px !important;
-    border-radius: 15px;
-  }
-  
-  input, select, textarea {
-    padding: 10px;
-    font-size: 16px !important;
-  }
-}
-
+/* Desktop Nav */
 .desktop-menu {
   display: flex !important;
 }
@@ -227,13 +175,113 @@ input:focus {
   display: none !important;
 }
 
+/* ===== MOBILE RESPONSIVENESS ===== */
 @media (max-width: 768px) {
+  /* Nav */
   .desktop-menu {
     display: none !important;
   }
-  
+
   .mobile-toggle {
     display: block !important;
   }
+
+  /* Layout */
+  .container {
+    padding: 0 12px;
+  }
+
+  .section-padding {
+    padding: 30px 0;
+  }
+
+  /* Typography */
+  h1 { font-size: 1.7rem !important; }
+  h2 { font-size: 1.4rem !important; }
+  h3 { font-size: 1.15rem !important; }
+
+  /* Sidebar hidden on mobile */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Main content full width */
+  .main-content {
+    padding: 10px 0 !important;
+    width: 100% !important;
+  }
+
+  /* Dashboard grid collapse */
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Quiz monitor 4-col → 2-col */
+  .quiz-monitor-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* CreateQuiz choice options: 2-col → 1-col */
+  .choice-options-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Side-by-side panels stack vertically */
+  .two-col-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Table on mobile: horizontal scroll */
+  .mobile-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Buttons */
+  .btn-primary, .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Page header stack */
+  .page-header-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+
+  /* Glassmorphism cards tighter padding */
+  .glass-morphism {
+    padding: 16px !important;
+  }
+
+  /* Bottom mobile tab bar placeholder area */
+  body {
+    padding-bottom: 0;
+  }
 }
 
+@media (max-width: 480px) {
+  h1 { font-size: 1.4rem !important; }
+  h2 { font-size: 1.2rem !important; }
+
+  .glass-morphism {
+    padding: 14px !important;
+    border-radius: 16px !important;
+  }
+
+  input, select, textarea {
+    padding: 11px !important;
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .quiz-monitor-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}

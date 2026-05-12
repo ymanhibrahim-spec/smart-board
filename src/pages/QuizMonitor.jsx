@@ -49,7 +49,7 @@ const QuizMonitor = () => {
 
   return (
     <div className="container section-padding">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+      <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
         <div>
           <Link to="/dashboard" style={{ color: 'var(--primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' }}>
             <ArrowRight size={18} className="rtl-flip" /> لوحة التحكم
@@ -64,7 +64,7 @@ const QuizMonitor = () => {
       </header>
 
       {/* Top Stats Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '30px' }}>
+      <div className="quiz-monitor-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '30px' }}>
         {[
           { label: 'إجمالي الطلاب', value: responses.length, icon: <Users />, color: '#3b82f6' },
           { label: 'مكتمل', value: completed.length, icon: <CheckCircle />, color: '#10b981' },
@@ -79,12 +79,12 @@ const QuizMonitor = () => {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '30px' }}>
+      <div className="two-col-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '30px' }}>
         {/* Main Students List */}
         <div className="glass-morphism" style={{ padding: '25px' }}>
           <h3 style={{ marginBottom: '20px' }}>قائمة الطلاب والنتائج المباشرة</h3>
-          <div style={{ width: '100%', overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'right' }}>
+          <div className="mobile-table-wrap" style={{ width: '100%', overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'right', minWidth: '500px' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid var(--border-color)', color: 'var(--text-muted)' }}>
                   <th style={{ padding: '15px' }}>الطالب</th>

@@ -106,15 +106,16 @@ const CreateQuiz = () => {
   }
 
   return (
+  return (
     <div className="container section-padding">
-      <header style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', justifyContent: 'space-between', alignItems: window.innerWidth < 768 ? 'stretch' : 'center', gap: '20px', marginBottom: '30px' }}>
+      <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}>
             <ArrowLeft size={24} className="rtl-flip" />
           </button>
           <h1 style={{ fontSize: '1.5rem' }}>تصميم الامتحان</h1>
         </div>
-        <div style={{ display: 'flex', gap: '10px', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <button className="btn-outline" onClick={() => setShowAIModal(true)} style={{ borderColor: 'var(--primary)', color: 'var(--primary)', borderStyle: 'dashed', borderWidth: '2px', padding: '12px' }}>
             <Sparkles size={18} /> {lang === 'ar' ? 'توليد ذكي' : 'AI Generate'}
           </button>
@@ -124,7 +125,7 @@ const CreateQuiz = () => {
         </div>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth < 1024 ? '1fr' : '1fr 350px', gap: '30px' }}>
+      <div className="two-col-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '30px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <input 
             type="text" 
@@ -159,7 +160,7 @@ const CreateQuiz = () => {
               />
               
               {q.type === 'choice' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                <div className="choice-options-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                   {q.options.map((opt, oIndex) => (
                     <div key={oIndex} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <input type="radio" name={`correct-${qIndex}`} checked={q.correctAnswer === opt && opt !== ''} onChange={() => handleQuestionChange(qIndex, 'correctAnswer', opt)} />

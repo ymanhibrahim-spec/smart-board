@@ -51,12 +51,12 @@ const Dashboard = () => {
     <div className="container" style={{ display: 'flex', gap: '30px', padding: '20px 0' }}>
       <Sidebar />
       <div className="main-content" style={{ flex: 1 }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+        <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
           <div>
             <h1 style={{ fontSize: '2.2rem', color: 'var(--primary)' }}>{t.welcome} {currentUser?.displayName || 'Yman'}! 👋</h1>
             <p style={{ color: 'var(--text-muted)' }}>{lang === 'ar' ? 'أهلاً بك في مركز التحكم الخاص بك.' : 'Welcome to your control center.'}</p>
           </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             <button 
               onClick={copyStudentLink} 
               className="btn-outline" 
@@ -75,7 +75,7 @@ const Dashboard = () => {
         </header>
 
         {/* Stats Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+        <div className="dashboard-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
           {[
             { label: t.lessonCount, value: lessons.length, icon: <BookOpen />, color: '#3b82f6' },
             { label: lang === 'ar' ? 'الامتحانات الحية' : 'Live Quizzes', value: quizzes.length, icon: <Award />, color: '#10b981' },
