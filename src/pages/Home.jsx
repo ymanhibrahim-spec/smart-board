@@ -59,36 +59,36 @@ const Home = () => {
   return (
     <div className="home-page">
       {/* Hero Section */}
-      <section className="hero section-padding" style={{ textAlign: 'center', background: 'linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%)', color: 'white', paddingTop: '100px', paddingBottom: '120px', position: 'relative', overflow: 'hidden' }}>
+      <section className="hero section-padding" style={{ textAlign: 'center', background: 'linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%)', color: 'white', paddingTop: 'min(120px, 15vh)', paddingBottom: 'min(120px, 15vh)', position: 'relative', overflow: 'hidden' }}>
         <div className="container">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} style={{ fontSize: '4rem', marginBottom: '20px', fontWeight: '900' }}>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} style={{ fontSize: 'min(4rem, 12vw)', marginBottom: '20px', fontWeight: '900' }}>
             {lang === 'ar' ? 'حصتي AI' : 'Hissati AI'}
           </motion.h1>
-          <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} style={{ fontSize: '1.4rem', opacity: 0.9, marginBottom: '60px', maxWidth: '800px', marginInline: 'auto' }}>
+          <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} style={{ fontSize: 'min(1.4rem, 5vw)', opacity: 0.9, marginBottom: '60px', maxWidth: '800px', marginInline: 'auto' }}>
             {lang === 'ar' ? 'المنصة الذكية الأسرع لإدارة الحصص والامتحانات التفاعلية.' : 'The fastest smart platform for managing lessons and interactive quizzes.'}
           </motion.p>
 
           {/* Student Entrance Portal */}
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="glass-morphism" style={{ maxWidth: '500px', margin: '0 auto', padding: '40px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(15px)' }}>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '30px' }}>{lang === 'ar' ? 'بوابة دخول الطلاب' : 'Student Entrance'}</h2>
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="glass-morphism" style={{ maxWidth: '450px', margin: '0 auto', padding: 'min(40px, 8vw)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(15px)' }}>
+            <h2 style={{ fontSize: 'min(1.5rem, 6vw)', marginBottom: '30px' }}>{lang === 'ar' ? 'بوابة دخول الطلاب' : 'Student Entrance'}</h2>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <div style={{ flex: 1, display: 'flex', background: 'white', borderRadius: '15px', overflow: 'hidden', padding: '5px' }}>
                   <input 
                     type="text" 
-                    placeholder={lang === 'ar' ? "رقم الامتحان (6 أرقام)" : "Quiz Code (6 digits)"}
+                    placeholder={lang === 'ar' ? "رقم الامتحان" : "Quiz Code"}
                     value={quizCode}
                     onChange={(e) => setQuizCode(e.target.value)}
                     maxLength={6}
-                    style={{ flex: 1, border: 'none', padding: '15px', fontSize: '1.2rem', color: 'var(--text-dark)', outline: 'none', textAlign: 'center' }}
+                    style={{ flex: 1, border: 'none', padding: '12px', fontSize: '1.1rem', color: 'var(--text-dark)', outline: 'none', textAlign: 'center' }}
                   />
                 </div>
                 <button 
                   onClick={() => setShowScanner(true)}
-                  style={{ width: '65px', background: 'var(--secondary)', color: 'white', border: 'none', borderRadius: '15px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ width: '55px', background: 'var(--secondary)', color: 'white', border: 'none', borderRadius: '15px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Camera size={28} />
+                  <Camera size={24} />
                 </button>
               </div>
 
@@ -96,13 +96,13 @@ const Home = () => {
                 onClick={handleJoinQuiz}
                 disabled={searching || quizCode.length < 6}
                 className="btn-primary" 
-                style={{ width: '100%', padding: '18px', fontSize: '1.2rem', background: '#00cc66', border: 'none', borderRadius: '15px', color: 'white', boxShadow: '0 10px 20px rgba(0,204,102,0.3)' }}
+                style={{ width: '100%', padding: '16px', fontSize: '1.1rem', background: '#00cc66', border: 'none', borderRadius: '15px', color: 'white', boxShadow: '0 10px 20px rgba(0,204,102,0.3)', justifyContent: 'center' }}
               >
-                {searching ? (lang === 'ar' ? 'جاري التحقق...' : 'Checking...') : (lang === 'ar' ? 'دخول الامتحان الآن' : 'Join Quiz Now')}
+                {searching ? (lang === 'ar' ? 'جاري التحقق...' : 'Checking...') : (lang === 'ar' ? 'دخول الآن' : 'Join Now')}
               </button>
             </div>
 
-            <div style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: '0.9rem', opacity: 0.8 }}>
+            <div style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: '0.85rem', opacity: 0.8 }}>
               {lang === 'ar' ? 'أو سجل دخولك كمعلم' : 'Or login as a teacher'} <Link to="/login" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline' }}>{lang === 'ar' ? 'من هنا' : 'here'}</Link>
             </div>
           </motion.div>
@@ -126,16 +126,16 @@ const Home = () => {
 
       {/* Features Grid */}
       <section className="section-padding container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
           {[
             { title: lang === 'ar' ? 'سبورة تفاعلية' : 'Smart Board', icon: <BookOpen />, color: '#3b82f6' },
             { title: lang === 'ar' ? 'امتحانات آمنة' : 'Secure Exams', icon: <Shield />, color: '#10b981' },
             { title: lang === 'ar' ? 'تقارير ذكية' : 'AI Reports', icon: <Zap />, color: '#f59e0b' }
           ].map((f, i) => (
-            <div key={i} className="glass-morphism" style={{ padding: '30px', textAlign: 'center' }}>
-              <div style={{ color: f.color, marginBottom: '15px' }}>{f.icon}</div>
-              <h3>{f.title}</h3>
-            </div>
+            <motion.div key={i} initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="glass-morphism" style={{ padding: '25px', textAlign: 'center' }}>
+              <div style={{ color: f.color, marginBottom: '15px', display: 'flex', justifyContent: 'center' }}>{f.icon}</div>
+              <h3 style={{ fontSize: '1.1rem' }}>{f.title}</h3>
+            </motion.div>
           ))}
         </div>
       </section>

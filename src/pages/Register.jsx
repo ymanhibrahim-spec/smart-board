@@ -59,7 +59,7 @@ const Register = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <form onSubmit={handleSubmit} className="two-col-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           <div className="form-group" style={{ gridColumn: 'span 2' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: '0.9rem' }}>الاسم الكامل</label>
             <div style={{ position: 'relative' }}>
@@ -84,7 +84,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mobile-full-width">
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: '0.9rem' }}>كلمة المرور</label>
             <div style={{ position: 'relative' }}>
               <Lock size={18} style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#aaa' }} />
@@ -92,7 +92,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mobile-full-width">
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: '0.9rem' }}>تأكيد الكلمة</label>
             <div style={{ position: 'relative' }}>
               <Lock size={18} style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#aaa' }} />

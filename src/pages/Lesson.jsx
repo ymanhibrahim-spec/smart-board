@@ -89,7 +89,7 @@ const Lesson = () => {
       
       {/* Top Header */}
       {!isFullScreen && (
-        <header className="glass-morphism" style={{ padding: '12px 20px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
+        <header className="page-header-row glass-morphism" style={{ padding: '12px 20px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1 }}>
             <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}>
               <ArrowLeft size={24} className="rtl-flip" />
@@ -102,27 +102,17 @@ const Lesson = () => {
               style={{ border: 'none', borderBottom: '2px solid var(--primary)', padding: '5px', fontSize: '1.1rem', fontWeight: 'bold', background: 'transparent', color: 'var(--text-dark)', outline: 'none', width: '100%', maxWidth: '200px' }}
             />
           </div>
-          <div className="desktop-only-feature" style={{ display: 'flex', gap: '15px' }}>
-            <button className="btn-primary" onClick={handleSave} disabled={loading}>
-              <Save size={20} /> {loading ? t.loading : (lang === 'ar' ? 'حفظ وإنهاء' : 'Save & Finish')}
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button className="btn-primary" onClick={handleSave} disabled={loading} style={{ padding: '8px 15px', fontSize: '0.9rem' }}>
+              <Save size={18} /> {loading ? t.loading : (lang === 'ar' ? 'إنهاء' : 'Finish')}
             </button>
           </div>
         </header>
       )}
 
-      {/* Mobile-only message for Lesson Page */}
-      <div className="mobile-only-feature" style={{ display: 'none', textAlign: 'center', padding: '40px 20px' }}>
-        <div className="glass-morphism" style={{ padding: '30px' }}>
-          <Smartphone size={60} color="var(--primary)" style={{ marginBottom: '20px' }} />
-          <h2 style={{ marginBottom: '15px' }}>السبورة الذكية</h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '25px' }}>عذراً، السبورة والمايكروفون متاحان فقط على أجهزة الكمبيوتر لضمان أفضل تجربة شرح.</p>
-          <button onClick={() => navigate('/dashboard')} className="btn-primary" style={{ width: '100%' }}>العودة للوحة التحكم</button>
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div className="desktop-only-feature" style={{ display: 'flex', flex: 1, gap: '15px', overflow: 'hidden', position: 'relative' }}>
-        <div style={{ flex: 1, height: '100%', position: 'relative' }}>
+      <div className="two-col-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 350px', flex: 1, gap: '15px', overflow: 'hidden', position: 'relative' }}>
+        <div style={{ flex: 1, height: '100%', minHeight: '300px', position: 'relative' }}>
           <Whiteboard 
             onSave={setBoardImage} 
             isFullScreen={isFullScreen} 
@@ -133,8 +123,8 @@ const Lesson = () => {
         </div>
 
         {!isFullScreen && (
-          <div style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <div className="glass-morphism" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div className="recorder-panel" style={{ display: 'flex', flexDirection: 'column', gap: '15px', overflowY: 'auto' }}>
+            <div className="glass-morphism" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minHeight: '300px' }}>
               <h3 style={{ fontSize: '1.1rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--primary)', fontWeight: 'bold' }}>
                 <FileText size={20} /> {lang === 'ar' ? 'مسجل الشرح الذكي' : 'Smart Recorder'}
               </h3>
@@ -156,22 +146,24 @@ const Lesson = () => {
               </div>
             </div>
 
-            <div className="glass-morphism" style={{ padding: '20px' }}>
-              <input 
-                type="text" 
-                placeholder={lang === 'ar' ? "المادة" : "Subject"}
-                value={lessonInfo.subject}
-                onChange={(e) => setLessonInfo({...lessonInfo, subject: e.target.value})}
-                style={{ width: '100%', padding: '12px', marginBottom: '10px' }}
-              />
-              <select 
-                style={{ width: '100%', padding: '12px' }}
-                value={lessonInfo.grade}
-                onChange={(e) => setLessonInfo({...lessonInfo, grade: e.target.value})}
-              >
-                <option value="">{lang === 'ar' ? 'اختر الصف' : 'Select Grade'}</option>
-                <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
-              </select>
+            <div className="glass-morphism" style={{ padding: '20px', marginBottom: '15px' }}>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <input 
+                  type="text" 
+                  placeholder={lang === 'ar' ? "المادة" : "Subject"}
+                  value={lessonInfo.subject}
+                  onChange={(e) => setLessonInfo({...lessonInfo, subject: e.target.value})}
+                  style={{ width: '100%', padding: '12px', marginBottom: '10px' }}
+                />
+                <select 
+                  style={{ width: '100%', padding: '12px', height: '48px' }}
+                  value={lessonInfo.grade}
+                  onChange={(e) => setLessonInfo({...lessonInfo, grade: e.target.value})}
+                >
+                  <option value="">{lang === 'ar' ? 'الصف' : 'Grade'}</option>
+                  <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
             </div>
           </div>
         )}

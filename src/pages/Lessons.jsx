@@ -50,7 +50,7 @@ const Lessons = () => {
     <div className="container" style={{ display: 'flex', gap: '30px', padding: '20px 0' }}>
       <Sidebar />
       <div className="main-content" style={{ flex: 1 }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+        <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
           <div>
             <h1 style={{ fontSize: '2.2rem', color: 'var(--primary)' }}>{lang === 'ar' ? 'أرشيف الدروس' : 'Lesson Archive'} 📚</h1>
             <p style={{ color: 'var(--text-muted)' }}>{lang === 'ar' ? 'جميع دروسك المشروحة على السبورة الذكية.' : 'All your lessons explained on the smart board.'}</p>

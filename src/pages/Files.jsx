@@ -55,7 +55,7 @@ const Files = () => {
     <div className="container" style={{ display: 'flex', gap: '30px', padding: '20px 0' }}>
       <Sidebar />
       <div className="main-content" style={{ flex: 1 }}>
-        <header style={{ marginBottom: '40px' }}>
+        <header className="page-header-row" style={{ marginBottom: '40px' }}>
           <h1 style={{ fontSize: '2.2rem', color: 'var(--primary)' }}>{lang === 'ar' ? 'مكتبة الملفات' : 'File Library'} 📁</h1>
           <p style={{ color: 'var(--text-muted)' }}>{lang === 'ar' ? 'جميع لقطات السبورة والملفات المحفوظة.' : 'All whiteboard captures and saved files.'}</p>
         </header>

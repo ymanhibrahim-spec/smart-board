@@ -44,7 +44,9 @@ const Settings = () => {
       <Sidebar />
       
       <div className="main-content" style={{ flex: 1 }}>
-        <h1 style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '30px' }}>{t.settings}</h1>
+        <header className="page-header-row" style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2rem', color: 'var(--primary)' }}>{t.settings}</h1>
+        </header>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {/* Profile Section */}
@@ -52,7 +54,7 @@ const Settings = () => {
             <h3 style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <User size={20} color="var(--primary)" /> {t.profile}
             </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="two-col-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-dark)' }}>{t.name}</label>
                 <input 

@@ -104,13 +104,22 @@ const StudentQuiz = () => {
   }
 
   if (step === 'cheated') return (
-    <div className="container" style={{ padding: '60px 20px', textAlign: 'center' }}>
-      <AlertTriangle size={60} color="#ff4444" style={{ marginBottom: '20px' }} />
-      <h2 style={{ color: '#ff4444', fontSize: '1.5rem' }}>⚠️ تم قفل الامتحان!</h2>
-      <p style={{ fontSize: '1.1rem', margin: '20px 0' }}>لقد حاولت الغش بمغادرة الصفحة. تم إرسال تنبيه للمعلم.</p>
-      <div className="glass-morphism" style={{ padding: '20px', background: 'rgba(255,68,68,0.05)', fontSize: '0.95rem' }}>
-        انتظر المعلم ليعطيك "فرصة ثانية" إذا وافق على ذلك. ستفتح الصفحة تلقائياً عند فك القفل.
-      </div>
+    <div className="container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-morphism" style={{ padding: '40px 20px', textAlign: 'center', maxWidth: '400px', border: '2px solid #ff4444' }}>
+        <div style={{ position: 'relative', display: 'inline-block', marginBottom: '25px' }}>
+          <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} style={{ position: 'absolute', inset: -10, background: 'rgba(255, 68, 68, 0.2)', borderRadius: '50%' }} />
+          <AlertTriangle size={80} color="#ff4444" style={{ position: 'relative' }} />
+        </div>
+        <h2 style={{ color: '#ff4444', fontSize: '1.8rem', marginBottom: '15px', fontWeight: '900' }}>⚠️ تم قفل الامتحان!</h2>
+        <p style={{ fontSize: '1.1rem', color: 'var(--text-dark)', marginBottom: '25px', lineHeight: '1.6' }}>
+          لقد حاولت الغش بمغادرة الصفحة أو تبديل النوافذ. <br/>
+          <strong>تم إرسال تنبيه فوري للمعلم.</strong>
+        </p>
+        <div style={{ padding: '20px', background: '#fff5f5', borderRadius: '20px', color: '#c53030', fontSize: '0.95rem', fontWeight: 'bold' }}>
+          يرجى الانتظار... <br/>
+          ستفتح الصفحة تلقائياً إذا وافق المعلم على منحك فرصة ثانية.
+        </div>
+      </motion.div>
     </div>
   )
 
