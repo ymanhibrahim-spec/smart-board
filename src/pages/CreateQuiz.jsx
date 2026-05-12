@@ -106,7 +106,6 @@ const CreateQuiz = () => {
   }
 
   return (
-  return (
     <div className="container section-padding">
       <header className="page-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
